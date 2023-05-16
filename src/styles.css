@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+
+.backimage {
+  background-image: url("https://image.freepik.com/free-vector/futuristic-digital-cyber-technology-background_115579-430.jpg"); /* Kullanılacak Görsel */
+  background-position: center; /* Görseli Ortala */
+  background-repeat: no-repeat; /* Resmi tekrarlama */
+  background-size: cover; /* resmi ekranı kaplayacak hale getir. */
+}
+
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~font-awesome/css/font-awesome.min.css";
+@import "~alertifyjs/build/css/alertify.min.css";
+@import "~alertifyjs/build/css/themes/bootstrap.min.css";
