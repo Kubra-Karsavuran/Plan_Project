@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 var login_shema = require("./login_shema");
+var main_shema = require("./main_shema");
 
 const mongoose = require("mongoose");
 mongoose.connect("mongodb://127.0.0.1/nots_project", {
@@ -25,6 +26,20 @@ app.get("/api/login/:ad_soyad/:sifre", (req, res) => {
   console.log(req.params.sifre);
   login_shema.find({ sifre: req.params.sifre }).then((data) => {
     console.log(data);
+    res.send(data);
+  });
+});
+
+// TODO Plan kaydı yapıldı
+app.post("/api/main", (req, res) => {
+  console.log("bakalım verı gelıyormu bakalım");
+  console.log(req.body);
+  main_shema.create(req.body);
+});
+
+// TODO verılerı yansıtma kısmı burda
+app.get("/api/veriler", (req, res) => {
+  main_shema.find({}).then((data) => {
     res.send(data);
   });
 });

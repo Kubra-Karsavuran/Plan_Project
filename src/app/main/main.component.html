@@ -1,8 +1,17 @@
 <div class="container">
   <div class="row">
     <div class="col-2"></div>
-    <div style="background-color: white; border-radius: 10px" class="col-8">
+
+    <!--plan ana kısım-->
+    <div
+      *ngIf="main"
+      style="background-color: white; border-radius: 10px"
+      class="col-8"
+    >
       <h3 style="color: darkblue">Plan Listeniz</h3>
+      <button (click)="planEkle()" type="button" class="btn btn-secondary">
+        Plan Ekle
+      </button>
 
       <div class="row g-0">
         <div class="col-2">
@@ -14,24 +23,25 @@
         <div class="col-2">
           <h5><b>Yapıldı mı ? </b></h5>
         </div>
-        <div class="row g-0">
+
+        <div *ngFor="let veriler of planListesi" class="row g-0">
           <!-- satır bir----------------------------------------------------------------------->
           <div
             style="
-              background-color: orange;
+              background-color: white;
               border-top-left-radius: 10px;
               border-bottom-left-radius: 10px;
             "
             class="col-2"
           >
-            <p>08.15</p>
+            <p>{{ veriler.plantime }}</p>
           </div>
-          <div style="background-color: orange" class="col-8">
-            <p>Uyanma saati</p>
+          <div style="background-color: white" class="col-8">
+            <p>{{ veriler.plandescription }}</p>
           </div>
           <div
             style="
-              background-color: orange;
+              background-color: white;
               border-top-right-radius: 10px;
               border-bottom-right-radius: 10px;
             "
@@ -40,35 +50,43 @@
             <button type="button" class="btn btn-primary">Yes/No</button>
           </div>
           <!-- satır ıkı------------------------------------------------------------------------>
-
-          <!-- satır ıkı------------------------------------------------------------------------>
-          <div
-            style="
-              background-color: orange;
-              border-top-left-radius: 10px;
-              border-bottom-left-radius: 10px;
-            "
-            class="col-2"
-          >
-            <p>08.15</p>
-          </div>
-          <div style="background-color: orange" class="col-8">
-            <p>Uyanma saati</p>
-          </div>
-          <div
-            style="
-              background-color: orange;
-              border-top-right-radius: 10px;
-              border-bottom-right-radius: 10px;
-            "
-            class="col-2"
-          >
-            <button type="button" class="btn btn-primary">Yes/No</button>
-          </div>
-          <!-- satır son------------------------------------------------------------------------>
         </div>
       </div>
-      <div class="col-2"></div>
     </div>
+
+    <!--plan alma kısmı-->
+    <div *ngIf="yan" class="col-8">
+      <h3 style="color: darkblue">Plan Ekleyin</h3>
+      <form [formGroup]="plankaydi" (ngSubmit)="plansave()">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Plan Saati</label>
+          <input
+            type="time"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            formControlName="plantime"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label"
+            >Plan Tanımı</label
+          >
+          <input
+            formControlName="plandescription"
+            type="text"
+            class="form-control"
+            id="exampleInputPassword1"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Planı Kaydet</button>
+      </form>
+      <button (click)="geriDon()" type="button" class="btn btn-secondary">
+        Geri Dön
+      </button>
+    </div>
+    <div class="col-2"></div>
   </div>
 </div>
