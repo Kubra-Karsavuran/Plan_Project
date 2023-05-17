@@ -19,10 +19,14 @@ app.use(
 );
 
 // TODO login kontrol
-app.post("/api/login/:ad_soyad/:sifre", (req, res) => {
+app.get("/api/login/:ad_soyad/:sifre", (req, res) => {
   console.log("gelen verıler");
   console.log(req.params.ad_soyad);
   console.log(req.params.sifre);
+  login_shema.find({ sifre: req.params.sifre }).then((data) => {
+    console.log(data);
+    res.send(data);
+  });
 });
 
 // TODO BAĞLANTI

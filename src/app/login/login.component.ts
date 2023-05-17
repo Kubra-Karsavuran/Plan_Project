@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../services/login.service';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,18 +9,19 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService, private router: Router) {}
   ngOnInit() {}
 
   ad_soyad = new FormControl('');
   sifre = new FormControl('');
 
-  loginControl() {
-    console.log('gelen verıler burda: ');
-    console.log(this.ad_soyad);
-    console.log(this.sifre);
-    // this.loginService
-    //   .loginVeri(this.ad_soyad, this.sifre)
-    //   .subscribe((data) => {});
+  veriler() {
+    this.loginService
+      .loginVeri(this.ad_soyad.value, this.sifre.value)
+      .subscribe((data) => {
+        console.log(data);
+        console.log('dayfa yonlendırme olacak');
+        this.router.navigateByUrl('/main');
+      });
   }
 }
