@@ -107,6 +107,15 @@ app.get("/api/tablotemizle", (req, res) => {
   });
 });
 
+// TODO plan silme işlemi yapılacak
+app.get("/api/planSil/:veri_id", (req, res) => {
+  console.log("sılınece plan ıd sı");
+  console.log(req.params.veri_id);
+  main_shema.deleteOne({ _id: req.params.veri_id }).then((data) => {
+    res.send(data);
+  });
+});
+
 // TODO BAĞLANTI
 const port = 3000;
 app.listen(port, () => {

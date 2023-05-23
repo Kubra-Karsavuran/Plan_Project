@@ -20,18 +20,24 @@
         <div class="col-2">
           <h5><b>Saat</b></h5>
         </div>
-        <div class="col-8">
+        <div class="col-6">
           <h5><b>Plan</b></h5>
         </div>
         <div class="col-2">
           <h5><b>Yapıldı mı ? </b></h5>
+        </div>
+        <div class="col-2">
+          <h5><b>Plan Sil</b></h5>
         </div>
 
         <div *ngFor="let veriler of planListesi" class="row g-0">
           <!-- satır bir----------------------------------------------------------------------->
           <div
             [ngStyle]="{
-              backgroundColor: veriler.makeit == 1 ? 'green' : 'red'
+              backgroundColor:
+                veriler.makeit == 1
+                  ? 'rgb(	144, 202, 249)'
+                  : 'rgb(255, 138, 101)'
             }"
             style="
               border-top-left-radius: 10px;
@@ -41,22 +47,26 @@
           >
             <p>{{ veriler.plantime }}</p>
           </div>
+
           <div
             [ngStyle]="{
-              backgroundColor: veriler.makeit == 1 ? 'green' : 'red'
+              backgroundColor:
+                veriler.makeit == 1
+                  ? 'rgb(	144, 202, 249)'
+                  : 'rgb(255, 138, 101)'
             }"
-            class="col-8"
+            class="col-6"
           >
             <p>{{ veriler.plandescription }}</p>
           </div>
+
           <div
             [ngStyle]="{
-              backgroundColor: veriler.makeit == 1 ? 'green' : 'red'
+              backgroundColor:
+                veriler.makeit == 1
+                  ? 'rgb(	144, 202, 249)'
+                  : 'rgb(255, 138, 101)'
             }"
-            style="
-              border-top-right-radius: 10px;
-              border-bottom-right-radius: 10px;
-            "
             class="col-2"
           >
             <button
@@ -74,6 +84,29 @@
               NO
             </button>
           </div>
+
+          <div
+            [ngStyle]="{
+              backgroundColor:
+                veriler.makeit == 1
+                  ? 'rgb(	144, 202, 249)'
+                  : 'rgb(255, 138, 101)'
+            }"
+            style="
+              border-top-right-radius: 10px;
+              border-bottom-right-radius: 10px;
+            "
+            class="col-2"
+          >
+            <button
+              (click)="planSil(veriler._id)"
+              type="button"
+              class="btn btn-light"
+            >
+              Sil
+            </button>
+          </div>
+
           <!-- satır ıkı------------------------------------------------------------------------>
         </div>
       </div>

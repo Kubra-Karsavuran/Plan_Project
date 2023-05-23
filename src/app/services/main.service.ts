@@ -33,4 +33,9 @@ export class MainService {
   tablotemizle(): Observable<{ result: string }> {
     return this.http.get<{ result: string }>('/api/tablotemizle/');
   }
+
+  // TODO plan silme işlemi yapılacak
+  planSil(veri_id: any): Observable<{ result: string }> {
+    return this.http.get<{ result: string }>('/api/planSil/' + veri_id);
+  }
 }

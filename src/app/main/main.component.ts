@@ -71,4 +71,10 @@ export class MainComponent {
       location.reload();
     });
   }
+
+  planSil(veri_id: any) {
+    this.mainService.planSil(veri_id).subscribe((data) => {
+      location.reload();
+    });
+  }
 }
