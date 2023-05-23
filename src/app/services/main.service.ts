@@ -28,4 +28,9 @@ export class MainService {
   planTakibiiki(veri_id: any): Observable<{ result: string }> {
     return this.http.get<{ result: string }>('/api/planTakibiiki/' + veri_id);
   }
+
+  // TODO tabloyu temızle ıslemı
+  tablotemizle(): Observable<{ result: string }> {
+    return this.http.get<{ result: string }>('/api/tablotemizle/');
+  }
 }

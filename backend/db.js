@@ -100,6 +100,13 @@ app.get("/api/planTakibiiki/:veri_id", (req, res) => {
     });
 });
 
+// TODO tablo temızleme işlemi
+app.get("/api/tablotemizle", (req, res) => {
+  main_shema.deleteMany({}).then((data) => {
+    res.send(data);
+  });
+});
+
 // TODO BAĞLANTI
 const port = 3000;
 app.listen(port, () => {

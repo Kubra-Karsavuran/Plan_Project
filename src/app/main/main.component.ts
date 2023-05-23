@@ -63,4 +63,12 @@ export class MainComponent {
       location.reload();
     });
   }
+
+  // TODO tablo temızleme ıslemı,
+  ClearTablo() {
+    this.mainService.tablotemizle().subscribe((data) => {
+      console.log('tablo temızlemdı');
+      location.reload();
+    });
+  }
 }
