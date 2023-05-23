@@ -18,4 +18,9 @@ export class MainService {
   verileriYansit(): Observable<main_shema[]> {
     return this.http.get<main_shema[]>('/api/veriler');
   }
+
+  // TODO plan takıbı yapılıyor burda
+  planTakibi(): Observable<{ result: number }> {
+    return this.http.get<{ result: number }>('/api/planTakibi');
+  }
 }

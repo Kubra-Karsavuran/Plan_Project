@@ -36,13 +36,25 @@ export class MainComponent {
   plankaydi = new FormGroup({
     plantime: new FormControl('', [Validators.required]),
     plandescription: new FormControl('', [Validators.required]),
+    makeit: new FormControl(0),
   });
 
   plansave() {
     console.log('gelen verı burda bakalım dogrumu geldı');
     console.log(this.plankaydi.value);
     this.mainService.makesaveplan(this.plankaydi.value).subscribe();
-    //this.router.navigateByUrl('/main');
-    alert('ana sayfayı kontrol edın');
+    location.reload();
+  }
+
+  renk: string = 'white';
+  id_get: number = 0;
+  //TODO verileri yaptınmı yapmadınmı
+  yesOrno(veri_id: any) {
+    this.mainService.planTakibi().subscribe((data) => {
+      this.id_get = veri_id;
+      if (data.result == 1) {
+        this.renk = 'green';
+      }
+    });
   }
 }
