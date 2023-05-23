@@ -20,7 +20,12 @@ export class MainService {
   }
 
   // TODO plan takıbı yapılıyor burda
-  planTakibi(): Observable<{ result: number }> {
-    return this.http.get<{ result: number }>('/api/planTakibi');
+  planTakibi(veri_id: any): Observable<{ result: string }> {
+    return this.http.get<{ result: string }>('/api/planTakibi/' + veri_id);
+  }
+
+  // TODO plan takıbı 1 -> 0 cevırme ıslemı yapılacak
+  planTakibiiki(veri_id: any): Observable<{ result: string }> {
+    return this.http.get<{ result: string }>('/api/planTakibiiki/' + veri_id);
   }
 }

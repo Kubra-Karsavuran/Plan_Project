@@ -57,11 +57,18 @@
             class="col-2"
           >
             <button
-              (click)="yesOrno(veriler._id)"
+              (click)="yes(veriler._id)"
               type="button"
               class="btn btn-primary"
             >
-              Yes/No
+              YES
+            </button>
+            <button
+              (click)="no(veriler._id)"
+              type="button"
+              class="btn btn-danger"
+            >
+              NO
             </button>
           </div>
           <!-- satır ıkı------------------------------------------------------------------------>

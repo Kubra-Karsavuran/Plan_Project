@@ -46,15 +46,21 @@ export class MainComponent {
     location.reload();
   }
 
-  renk: string = 'white';
-  id_get: number = 0;
-  //TODO verileri yaptınmı yapmadınmı
-  yesOrno(veri_id: any) {
-    this.mainService.planTakibi().subscribe((data) => {
-      this.id_get = veri_id;
-      if (data.result == 1) {
-        this.renk = 'green';
-      }
+  //TODO verileri  0 -> 1 yapma işlemi
+  yes(veri_id: any) {
+    this.mainService.planTakibi(veri_id).subscribe((data) => {
+      console.log('gelen veri:');
+      console.log(data.result);
+      location.reload();
+    });
+  }
+
+  // TODO verileri 1 -> 0 yapma işlemi yapılacak
+  no(veri_id: any) {
+    this.mainService.planTakibiiki(veri_id).subscribe((data) => {
+      console.log('gelen veri:');
+      console.log(data.result);
+      location.reload();
     });
   }
 }
