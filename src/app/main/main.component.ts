@@ -24,13 +24,17 @@ export class MainComponent {
   //TODO modal ıslemlerı yapıldı
   main: boolean = true;
   yan: boolean = false;
+  ayrintidiv: boolean = false;
+  guncelle_div: boolean = false;
   planEkle() {
     this.main = false;
     this.yan = true;
   }
   geriDon() {
-    this.main = true;
-    this.yan = false;
+    this.main = true; // plan liste
+    this.yan = false; // plan alma
+    this.ayrintidiv = false; // plan ayırntıları
+    this.guncelle_div = false;
   }
 
   // TODO plan kaydı yapılacak
@@ -82,7 +86,7 @@ export class MainComponent {
   }
 
   // TODO planin ayrıntılarını yansıtacak
-  ayrintidiv: boolean = false;
+
   ayrinti(veri_id: any) {
     this.mainService.ayrinti(veri_id).subscribe((data) => {
       this.main = false;
@@ -97,10 +101,15 @@ export class MainComponent {
     this.main = true; // plan liste
     this.yan = false; // plan alma
     this.ayrintidiv = false; // plan ayırntıları
+    this.guncelle_div = false;
   }
 
   // TODO plan guncelleme olacak burda
-  güncelleme(veri_id: any) {
-    alert('guncelleme olacak');
+
+  gunveriget(veri_id: any) {
+    this.main = false; // plan liste
+    this.yan = false; // plan alma
+    this.ayrintidiv = false; // plan ayırntıları
+    this.guncelle_div = true; // guncelleme dıvı
   }
 }

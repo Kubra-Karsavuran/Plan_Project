@@ -48,7 +48,7 @@
           <h5><b>Yapıldı mı ? </b></h5>
         </div>
         <div class="col-2">
-          <h5><b>Ayrıntı </b></h5>
+          <h5><b>Detay</b></h5>
         </div>
         <div class="col-2">
           <h5><b>Güncelle</b></h5>
@@ -126,7 +126,7 @@
               type="button"
               class="btn btn-primary"
             >
-              Ayrıntı
+              Detay
             </button>
           </div>
 
@@ -139,7 +139,13 @@
             }"
             class="col-2"
           >
-            <button type="button" class="btn btn-secondary">Güncelle</button>
+            <button
+              (click)="gunveriget(veriler._id)"
+              type="button"
+              class="btn btn-secondary"
+            >
+              Güncelle
+            </button>
           </div>
 
           <div
@@ -219,9 +225,9 @@
     <div
       *ngIf="ayrintidiv"
       class="col-8"
-      style="background-color: rgb(197, 202, 233); border-radius: 10px"
+      style="background-color: rgb(232, 234, 246); border-radius: 10px"
     >
-      <h3 style="color: darkblue">Plan Ayrıntıları</h3>
+      <h3 style="color: darkblue">Plan Detayları</h3>
       <div class="row">
         <div class="col-2"></div>
         <div *ngFor="let data of planAyrinti" class="col-8">
@@ -262,6 +268,52 @@
         </div>
         <div class="col-2"></div>
       </div>
+    </div>
+
+    <!--guncelleme dıvı burda-->
+    <div *ngIf="guncelle_div" class="col-8">
+      <h3 style="color: darkblue">Güncelleme Sayfası</h3>
+      <form [formGroup]="plankaydi" (ngSubmit)="plansave()">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Plan Saati</label>
+          <input
+            type="time"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            formControlName="plantime"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label"
+            >Plan Tanımı</label
+          >
+          <input
+            formControlName="plandescription"
+            type="text"
+            class="form-control"
+            id="exampleInputPassword1"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label"
+            >Plan Notu</label
+          >
+          <input
+            formControlName="plannot"
+            type="text"
+            class="form-control"
+            id="exampleInputPassword1"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Planı Kaydet</button>
+      </form>
+      <button (click)="geriDon()" type="button" class="btn btn-secondary">
+        Geri Dön
+      </button>
     </div>
 
     <div class="col-2"></div>
