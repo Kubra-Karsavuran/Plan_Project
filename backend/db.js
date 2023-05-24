@@ -116,6 +116,13 @@ app.get("/api/planSil/:veri_id", (req, res) => {
   });
 });
 
+// TODO plan ayrıntı goruntulemme ıslemı
+app.get("/api/planAyrinti/:veri_id", (req, res) => {
+  main_shema.find({ _id: req.params.veri_id }).then((data) => {
+    res.send(data);
+  });
+});
+
 // TODO BAĞLANTI
 const port = 3000;
 app.listen(port, () => {

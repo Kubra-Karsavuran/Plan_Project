@@ -1,4 +1,4 @@
-<div class="container">
+<div style="margin-top: 100px" class="container">
   <div class="row">
     <div class="col-2"></div>
 
@@ -8,23 +8,50 @@
       style="background-color: white; border-radius: 10px"
       class="col-8"
     >
-      <h3 style="color: darkblue">Plan Listeniz</h3>
-      <button (click)="planEkle()" type="button" class="btn btn-secondary">
-        Plan Ekle
-      </button>
-      <button (click)="ClearTablo()" type="button" class="btn btn-dark">
-        Tabloyu Temizle
-      </button>
+      <h3 style="color: darkblue">Günlük Plan Listeniz</h3>
+
+      <div class="d-flex justify-content-end">
+        <div class="col-example">
+          <button type="button" class="btn btn-outline-primary">
+            Yapılanlar
+          </button>
+        </div>
+        <div style="margin-left: 5px" class="col-example">
+          <button type="button" class="btn btn-outline-danger">
+            Yapılmayanlar
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <button (click)="planEkle()" type="button" class="btn btn-secondary">
+          Plan Ekle
+        </button>
+        <button
+          style="margin-left: 5px"
+          (click)="ClearTablo()"
+          type="button"
+          class="btn btn-dark"
+        >
+          Tabloyu Temizle
+        </button>
+      </div>
 
       <div class="row g-0">
         <div class="col-2">
           <h5><b>Saat</b></h5>
         </div>
-        <div class="col-6">
+        <div class="col-2">
           <h5><b>Plan</b></h5>
         </div>
         <div class="col-2">
           <h5><b>Yapıldı mı ? </b></h5>
+        </div>
+        <div class="col-2">
+          <h5><b>Ayrıntı </b></h5>
+        </div>
+        <div class="col-2">
+          <h5><b>Güncelle</b></h5>
         </div>
         <div class="col-2">
           <h5><b>Plan Sil</b></h5>
@@ -36,8 +63,8 @@
             [ngStyle]="{
               backgroundColor:
                 veriler.makeit == 1
-                  ? 'rgb(	144, 202, 249)'
-                  : 'rgb(255, 138, 101)'
+                  ? 'rgb(	187, 222, 251)'
+                  : 'rgb(255, 204, 188)'
             }"
             style="
               border-top-left-radius: 10px;
@@ -52,10 +79,10 @@
             [ngStyle]="{
               backgroundColor:
                 veriler.makeit == 1
-                  ? 'rgb(	144, 202, 249)'
-                  : 'rgb(255, 138, 101)'
+                  ? 'rgb(	187, 222, 251)'
+                  : 'rgb(255, 204, 188)'
             }"
-            class="col-6"
+            class="col-2"
           >
             <p>{{ veriler.plandescription }}</p>
           </div>
@@ -64,8 +91,8 @@
             [ngStyle]="{
               backgroundColor:
                 veriler.makeit == 1
-                  ? 'rgb(	144, 202, 249)'
-                  : 'rgb(255, 138, 101)'
+                  ? 'rgb(	187, 222, 251)'
+                  : 'rgb(255, 204, 188)'
             }"
             class="col-2"
           >
@@ -89,8 +116,38 @@
             [ngStyle]="{
               backgroundColor:
                 veriler.makeit == 1
-                  ? 'rgb(	144, 202, 249)'
-                  : 'rgb(255, 138, 101)'
+                  ? 'rgb(	187, 222, 251)'
+                  : 'rgb(255, 204, 188)'
+            }"
+            class="col-2"
+          >
+            <button
+              (click)="ayrinti(veriler._id)"
+              type="button"
+              class="btn btn-primary"
+            >
+              Ayrıntı
+            </button>
+          </div>
+
+          <div
+            [ngStyle]="{
+              backgroundColor:
+                veriler.makeit == 1
+                  ? 'rgb(	187, 222, 251)'
+                  : 'rgb(255, 204, 188)'
+            }"
+            class="col-2"
+          >
+            <button type="button" class="btn btn-secondary">Güncelle</button>
+          </div>
+
+          <div
+            [ngStyle]="{
+              backgroundColor:
+                veriler.makeit == 1
+                  ? 'rgb(	187, 222, 251)'
+                  : 'rgb(255, 204, 188)'
             }"
             style="
               border-top-right-radius: 10px;
@@ -139,12 +196,74 @@
             required
           />
         </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label"
+            >Plan Notu</label
+          >
+          <input
+            formControlName="plannot"
+            type="text"
+            class="form-control"
+            id="exampleInputPassword1"
+            required
+          />
+        </div>
         <button type="submit" class="btn btn-primary">Planı Kaydet</button>
       </form>
       <button (click)="geriDon()" type="button" class="btn btn-secondary">
         Geri Dön
       </button>
     </div>
+
+    <!-- ayrıntı gosterılen dıv burda-->
+    <div
+      *ngIf="ayrintidiv"
+      class="col-8"
+      style="background-color: rgb(197, 202, 233); border-radius: 10px"
+    >
+      <h3 style="color: darkblue">Plan Ayrıntıları</h3>
+      <div class="row">
+        <div class="col-2"></div>
+        <div *ngFor="let data of planAyrinti" class="col-8">
+          <div class="mb-3">
+            <label for="basic-url" class="form-label"
+              ><b>Plan Saati: </b></label
+            >
+            <div style="padding-left: 20px" class="input-group">
+              {{ data.plantime }}
+            </div>
+          </div>
+          <hr />
+          <div class="mb-3">
+            <label for="basic-url" class="form-label"
+              ><b>Plan Tanımı: </b></label
+            >
+            <div style="padding-left: 20px" class="input-group">
+              {{ data.plandescription }}
+            </div>
+          </div>
+          <hr />
+          <div class="mb-3">
+            <label for="basic-url" class="form-label"
+              ><b>Plan Açıklama: </b></label
+            >
+            <div style="padding-left: 20px" class="input-group">
+              {{ data.plannot }}
+            </div>
+          </div>
+          <hr />
+          <button
+            (click)="ayrintikapat()"
+            type="button"
+            class="btn btn-secondary"
+          >
+            Kapat
+          </button>
+        </div>
+        <div class="col-2"></div>
+      </div>
+    </div>
+
     <div class="col-2"></div>
   </div>
 </div>

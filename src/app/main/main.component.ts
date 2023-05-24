@@ -13,6 +13,7 @@ export class MainComponent {
   constructor(private mainService: MainService, private router: Router) {}
 
   planListesi: main_shema[] = [];
+  planAyrinti: main_shema[] = [];
   //TODO ekrana yansıtılacaklar
   ngOnInit() {
     this.mainService.verileriYansit().subscribe((data) => {
@@ -36,6 +37,7 @@ export class MainComponent {
   plankaydi = new FormGroup({
     plantime: new FormControl('', [Validators.required]),
     plandescription: new FormControl('', [Validators.required]),
+    plannot: new FormControl('', [Validators.required]),
     makeit: new FormControl(0),
   });
 
@@ -72,9 +74,33 @@ export class MainComponent {
     });
   }
 
+  // TODO plan silme işlemi
   planSil(veri_id: any) {
     this.mainService.planSil(veri_id).subscribe((data) => {
       location.reload();
     });
+  }
+
+  // TODO planin ayrıntılarını yansıtacak
+  ayrintidiv: boolean = false;
+  ayrinti(veri_id: any) {
+    this.mainService.ayrinti(veri_id).subscribe((data) => {
+      this.main = false;
+      this.yan = false;
+      this.ayrintidiv = true;
+      this.planAyrinti = data;
+    });
+  }
+
+  // TODO ayrıntı kapatma kısmı
+  ayrintikapat() {
+    this.main = true; // plan liste
+    this.yan = false; // plan alma
+    this.ayrintidiv = false; // plan ayırntıları
+  }
+
+  // TODO plan guncelleme olacak burda
+  güncelleme(veri_id: any) {
+    alert('guncelleme olacak');
   }
 }

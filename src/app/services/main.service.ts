@@ -38,4 +38,9 @@ export class MainService {
   planSil(veri_id: any): Observable<{ result: string }> {
     return this.http.get<{ result: string }>('/api/planSil/' + veri_id);
   }
+
+  // TODO PLANIN AYRINTILARI YANSITILACAK
+  ayrinti(veri_id: any): Observable<main_shema[]> {
+    return this.http.get<main_shema[]>('/api/planAyrinti/' + veri_id);
+  }
 }
