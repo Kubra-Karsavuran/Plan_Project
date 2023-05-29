@@ -43,4 +43,12 @@ export class MainService {
   ayrinti(veri_id: any): Observable<main_shema[]> {
     return this.http.get<main_shema[]>('/api/planAyrinti/' + veri_id);
   }
+
+  //TODO guncelleme ışlemi yapılacak
+  newupdate(updateVerileri: any, guncel_veri_id: any) {
+    return this.http.post<main_shema[]>('/api/Update', {
+      updateVerileri,
+      guncel_veri_id,
+    });
+  }
 }

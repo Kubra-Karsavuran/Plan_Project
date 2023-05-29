@@ -123,6 +123,34 @@ app.get("/api/planAyrinti/:veri_id", (req, res) => {
   });
 });
 
+// TODO guncelleme işlemi yapılacak
+app.post("/api/Update", (req, res) => {
+  console.log(req.body); // verı
+  console.log(req.body.guncel_veri_id); // guncellenecek id
+
+  main_shema
+    .findOneAndUpdate(
+      {
+        _id: req.body.guncel_veri_id,
+      },
+      {
+        $set: {
+          plantime: req.body.updateVerileri.newtime,
+          plandescription: req.body.updateVerileri.newdescription,
+          plannot: req.body.updateVerileri.newnot,
+        },
+      }
+    )
+    .then((result) => {
+      res.status(200).json({
+        updated_product: result,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 // TODO BAĞLANTI
 const port = 3000;
 app.listen(port, () => {

@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { MainService } from '../services/main.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { main_shema } from './main_shema';
 
@@ -10,10 +15,15 @@ import { main_shema } from './main_shema';
   styleUrls: ['./main.component.css'],
 })
 export class MainComponent {
-  constructor(private mainService: MainService, private router: Router) {}
+  constructor(
+    private mainService: MainService,
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
 
   planListesi: main_shema[] = [];
   planAyrinti: main_shema[] = [];
+  guncel_veri: main_shema[] = [];
   //TODO ekrana yansıtılacaklar
   ngOnInit() {
     this.mainService.verileriYansit().subscribe((data) => {
@@ -86,7 +96,6 @@ export class MainComponent {
   }
 
   // TODO planin ayrıntılarını yansıtacak
-
   ayrinti(veri_id: any) {
     this.mainService.ayrinti(veri_id).subscribe((data) => {
       this.main = false;
@@ -104,12 +113,40 @@ export class MainComponent {
     this.guncelle_div = false;
   }
 
-  // TODO plan guncelleme olacak burda
+  // TODO guncelleme form tanımı
+  newform = new FormGroup({
+    newtime: new FormControl('', [Validators.required]),
+    newdescription: new FormControl('', [Validators.required]),
+    newnot: new FormControl('', [Validators.required]),
+  });
 
-  gunveriget(veri_id: any) {
+  guncel_veri_id: number = 0;
+  // TODO plan guncelleme olacak burda
+  gunveriget(veriler: main_shema): void {
     this.main = false; // plan liste
     this.yan = false; // plan alma
     this.ayrintidiv = false; // plan ayırntıları
     this.guncelle_div = true; // guncelleme dıvı
+    // guncellemeler için yapılan işlemdir
+    this.guncel_veri_id = veriler._id;
+
+    this.newform = this.fb.group({
+      newtime: [veriler.plantime],
+      newdescription: [veriler.plandescription],
+      newnot: [veriler.plannot],
+    });
+  }
+
+  // TODO plan guncelleme işlemi yapılacak burda
+  update() {
+    console.log('gelen guncel verı burda');
+    console.log(this.newform.value);
+    console.log('guncellenecek verı id si');
+    console.log(this.guncel_veri_id);
+    this.mainService
+      .newupdate(this.newform.value, this.guncel_veri_id)
+      .subscribe((data) => {
+        console.log('guncelleme oldu');
+      });
   }
 }

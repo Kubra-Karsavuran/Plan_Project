@@ -140,7 +140,7 @@
             class="col-2"
           >
             <button
-              (click)="gunveriget(veriler._id)"
+              (click)="gunveriget(veriler)"
               type="button"
               class="btn btn-secondary"
             >
@@ -273,7 +273,7 @@
     <!--guncelleme dıvı burda-->
     <div *ngIf="guncelle_div" class="col-8">
       <h3 style="color: darkblue">Güncelleme Sayfası</h3>
-      <form [formGroup]="plankaydi" (ngSubmit)="plansave()">
+      <form [formGroup]="newform" (ngSubmit)="update()">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Plan Saati</label>
           <input
@@ -281,7 +281,7 @@
             class="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
-            formControlName="plantime"
+            formControlName="newtime"
             required
           />
         </div>
@@ -290,7 +290,7 @@
             >Plan Tanımı</label
           >
           <input
-            formControlName="plandescription"
+            formControlName="newdescription"
             type="text"
             class="form-control"
             id="exampleInputPassword1"
@@ -302,7 +302,7 @@
             >Plan Notu</label
           >
           <input
-            formControlName="plannot"
+            formControlName="newnot"
             type="text"
             class="form-control"
             id="exampleInputPassword1"
