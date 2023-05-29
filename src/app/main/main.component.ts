@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { main_shema } from './main_shema';
+import { AlertjsService } from '../services/alertjs.service';
 
 @Component({
   selector: 'app-main',
@@ -18,7 +19,8 @@ export class MainComponent {
   constructor(
     private mainService: MainService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private alertjs: AlertjsService
   ) {}
 
   planListesi: main_shema[] = [];
@@ -146,7 +148,10 @@ export class MainComponent {
     this.mainService
       .newupdate(this.newform.value, this.guncel_veri_id)
       .subscribe((data) => {
-        console.log('guncelleme oldu');
+        this.alertjs.kayitOldu('bakalim gelecekmi');
+        setInterval(function () {
+          window.location.reload();
+        }, 2000);
       });
   }
 }
