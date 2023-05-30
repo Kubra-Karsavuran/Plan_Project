@@ -63,7 +63,7 @@ export class MainService {
     return this.http.get<main_shema[]>('/api/yapilmayanlar/');
   }
 
-  // TODO havadurumu verıleri
+  // TODO havadurumu verileri
   havaDurumu(): Observable<weader_shema> {
     return this.http.get<weader_shema>('/api/hava');
   }
