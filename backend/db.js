@@ -3,6 +3,8 @@ const app = express();
 var login_shema = require("./login_shema");
 var main_shema = require("./main_shema");
 
+const https = require("https");
+
 const mongoose = require("mongoose");
 mongoose.connect("mongodb://127.0.0.1/nots_project", {
   useNewUrlParser: true,
@@ -35,6 +37,7 @@ app.post("/api/main", (req, res) => {
   console.log("bakalım verı gelıyormu bakalım");
   console.log(req.body);
   main_shema.create(req.body);
+  res.send(req.body);
 });
 
 // TODO verılerı yansıtma kısmı burda
@@ -149,6 +152,32 @@ app.post("/api/Update", (req, res) => {
     .catch((err) => {
       console.log(err);
     });
+});
+
+// TODO yapılanlar kısmı
+app.get("/api/yapilanlar", (req, res) => {
+  main_shema.find({ makeit: 1 }).then((data) => {
+    res.send(data);
+  });
+});
+
+// TODO yapilmayanlar kısmı
+app.get("/api/yapilmayanlar", (req, res) => {
+  main_shema.find({ makeit: 0 }).then((data) => {
+    res.send(data);
+  });
+});
+
+// TODO HAVADUURMU VERILERI
+app.get("/api/hava", (req, res) => {
+  const api =
+    "https://api.openweathermap.org/data/2.5/weather?q=ankara&appid=19b3c4d52f9277b4486320e217e2315f&units=metric&lang=tr";
+  https.get(api, function (response) {
+    response.on("data", function (data) {
+      const weatherData = JSON.parse(data);
+      res.send(weatherData);
+    });
+  });
 });
 
 // TODO BAĞLANTI

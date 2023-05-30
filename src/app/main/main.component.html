@@ -1,4 +1,56 @@
-<div style="margin-top: 100px" class="container">
+<div
+  *ngIf="wea_shema !== undefined"
+  class="container"
+  style="
+    background-color: rgb(187, 222, 251);
+    margin-bottom: 70px;
+    border-radius: 20px;
+  "
+>
+  <div class="row">
+    <div class="col-2">
+      <h6>
+        <b><i>Konum</i></b>
+        : {{ wea_shema.name }}
+      </h6>
+    </div>
+    <div class="col-9">
+      <div class="row">
+        <div class="col-2">
+          <h6>
+            <b><i>Derece :</i></b> {{ wea_shema.main.temp }}
+          </h6>
+        </div>
+        <div class="col-4">
+          <h6>
+            <b> <i>Hissedilen :</i></b> {{ wea_shema.main.feels_like }}
+          </h6>
+        </div>
+        <div class="col-6">
+          <h6>
+            <b> <i>Hava Durumu :</i></b>
+            {{ wea_shema.weather[0]["description"] }}
+          </h6>
+        </div>
+      </div>
+    </div>
+    <div class="col-1"></div>
+  </div>
+</div>
+
+<div
+  *ngIf="wea_shema == undefined"
+  class="container"
+  style="
+    background-color: rgb(187, 222, 251);
+    margin-bottom: 70px;
+    border-radius: 20px;
+  "
+>
+  <div>Havadurumu gösterilemiyor</div>
+</div>
+
+<div class="container">
   <div class="row">
     <div class="col-2"></div>
 
@@ -12,12 +64,20 @@
 
       <div class="d-flex justify-content-end">
         <div class="col-example">
-          <button type="button" class="btn btn-outline-primary">
+          <button
+            (click)="makeit()"
+            type="button"
+            class="btn btn-outline-primary"
+          >
             Yapılanlar
           </button>
         </div>
         <div style="margin-left: 5px" class="col-example">
-          <button type="button" class="btn btn-outline-danger">
+          <button
+            (click)="notmakeit()"
+            type="button"
+            class="btn btn-outline-danger"
+          >
             Yapılmayanlar
           </button>
         </div>
@@ -312,6 +372,123 @@
         <button type="submit" class="btn btn-primary">Planı Kaydet</button>
       </form>
       <button (click)="geriDon()" type="button" class="btn btn-secondary">
+        Geri Dön
+      </button>
+    </div>
+
+    <!--yapılanlar-->
+    <div
+      *ngIf="deger1"
+      class="col-8"
+      style="background-color: white; border-radius: 10px"
+    >
+      <h3>Yapılan Plan Bulunamadı</h3>
+      <button (click)="ayrintikapat()" type="button" class="btn btn-secondary">
+        Geri Dön
+      </button>
+    </div>
+    <div
+      *ngIf="yapilanlar"
+      class="col-8"
+      style="background-color: white; border-radius: 10px"
+    >
+      <h3 style="color: darkblue">Yapılan Planlar</h3>
+
+      <div class="row g-0">
+        <div class="col-6">
+          <h5><b>Saat</b></h5>
+        </div>
+        <div class="col-6">
+          <h5><b>Plan</b></h5>
+        </div>
+
+        <div *ngFor="let veriler of yapilanlarget" class="row g-0">
+          <!-- satır bir----------------------------------------------------------------------->
+          <div
+            style="
+              border-top-left-radius: 10px;
+              border-bottom-left-radius: 10px;
+              background-color: rgb(187, 222, 251);
+            "
+            class="col-6"
+          >
+            <p>{{ veriler.plantime }}</p>
+          </div>
+
+          <div
+            style="
+              border-top-right-radius: 10px;
+              border-bottom-right-radius: 10px;
+              background-color: rgb(187, 222, 251);
+            "
+            class="col-6"
+          >
+            <p>{{ veriler.plandescription }}</p>
+          </div>
+          <!-- satır ıkı------------------------------------------------------------------------>
+        </div>
+      </div>
+      <br />
+      <button (click)="ayrintikapat()" type="button" class="btn btn-secondary">
+        Geri Dön
+      </button>
+    </div>
+
+    <!--yapılmayan planlar-->
+    <div
+      *ngIf="deger"
+      class="col-8"
+      style="background-color: white; border-radius: 10px"
+    >
+      <h3>Yapılmayan Plan Bulunamadı</h3>
+      <button (click)="ayrintikapat()" type="button" class="btn btn-secondary">
+        Geri Dön
+      </button>
+    </div>
+    <div
+      *ngIf="yapilmayanlar"
+      class="col-8"
+      style="background-color: white; border-radius: 10px"
+    >
+      <h3 style="color: darkblue">Yapılmayan Planlar</h3>
+
+      <div class="row g-0">
+        <div class="col-6">
+          <h5><b>Saat</b></h5>
+        </div>
+        <div class="col-6">
+          <h5><b>Plan</b></h5>
+        </div>
+
+        <div *ngFor="let veriler of yapilmayanlarget" class="row g-0">
+          <!-- satır bir----------------------------------------------------------------------->
+
+          <div
+            style="
+              border-top-left-radius: 10px;
+              border-bottom-left-radius: 10px;
+              background-color: rgb(255, 204, 188);
+            "
+            class="col-6"
+          >
+            <p>{{ veriler.plantime }}</p>
+          </div>
+
+          <div
+            style="
+              border-top-right-radius: 10px;
+              border-bottom-right-radius: 10px;
+              background-color: rgb(255, 204, 188);
+            "
+            class="col-6"
+          >
+            <p>{{ veriler.plandescription }}</p>
+          </div>
+          <!-- satır ıkı------------------------------------------------------------------------>
+        </div>
+      </div>
+      <br />
+      <button (click)="ayrintikapat()" type="button" class="btn btn-secondary">
         Geri Dön
       </button>
     </div>

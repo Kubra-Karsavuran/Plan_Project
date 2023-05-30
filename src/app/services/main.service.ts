@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { main_shema } from '../main/main_shema';
 import { Observable } from 'rxjs';
+import { weader_shema } from '../main/weader_shema';
 
 @Injectable({
   providedIn: 'root',
@@ -50,5 +51,20 @@ export class MainService {
       updateVerileri,
       guncel_veri_id,
     });
+  }
+
+  // TODO yapılanlar kısmı
+  yapilanlar(): Observable<main_shema[]> {
+    return this.http.get<main_shema[]>('/api/yapilanlar/');
+  }
+
+  // TODO yapilmayanlar ıslemı yapılacak
+  yapilmayanlar(): Observable<main_shema[]> {
+    return this.http.get<main_shema[]>('/api/yapilmayanlar/');
+  }
+
+  // TODO havadurumu verıleri
+  havaDurumu(): Observable<weader_shema> {
+    return this.http.get<weader_shema>('/api/hava');
   }
 }
